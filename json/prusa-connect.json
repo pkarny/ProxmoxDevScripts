@@ -46,6 +46,10 @@
     {
       "text": "Printers need firmware 6.4.0 or newer. Use the container IP as the printer's hostname, which is limited to 20 characters.",
       "type": "info"
+    },
+    {
+      "text": "Updates back up the SQLite databases only. If you move a database to PostgreSQL, back it up yourself before running update.",
+      "type": "warning"
     }
   ]
 }

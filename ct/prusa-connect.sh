@@ -36,8 +36,11 @@ function update_script() {
   if GH_INCLUDE_PRERELEASE=1 check_for_gh_release "prusa-connect" "prusa3d/prusa-connect"; then
     msg_info "Backing up Prusa Connect"
     cd /opt/prusa-connect_data
-    $STD /opt/prusa-connect/prusa-connect backup create -config /opt/prusa-connect_data/config/config.yaml -upgrade-to "${CHECK_UPDATE_RELEASE#v}"
+    BACKUP_MANIFEST=$(/opt/prusa-connect/prusa-connect backup create -config /opt/prusa-connect_data/config/config.yaml -upgrade-to "${CHECK_UPDATE_RELEASE#v}" -acknowledge-external-postgres -json)
     msg_ok "Backed up Prusa Connect"
+    if [[ "$BACKUP_MANIFEST" == *'"postgres":'* ]]; then
+      msg_warn "PostgreSQL databases are not in this backup. To roll back, restore them from your own backups."
+    fi
 
     msg_info "Stopping Prusa Connect"
     systemctl stop prusa-connect
