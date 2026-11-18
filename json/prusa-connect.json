@@ -1,0 +1,51 @@
+{
+  "name": "Prusa Connect",
+  "slug": "prusa-connect",
+  "categories": [
+    16
+  ],
+  "date_created": "2026-11-18",
+  "type": "ct",
+  "updateable": true,
+  "privileged": false,
+  "interface_port": 8080,
+  "documentation": "https://github.com/prusa3d/prusa-connect/tree/main/docs/src/content/docs",
+  "website": "https://github.com/prusa3d/prusa-connect",
+  "repository": "https://github.com/prusa3d/prusa-connect",
+  "architectures": [
+    "amd64"
+  ],
+  "platforms": [
+    "pve"
+  ],
+  "logo": "https://raw.githubusercontent.com/prusa3d/prusa-connect/main/frontend/public/icons/icon-512.png",
+  "description": "Prusa Connect is Prusa Research's self-hosted server for 3D printers. Printers connect to it over your own network instead of the cloud, and the web app shows the whole fleet live, sends G-code and starts, pauses or stops prints. It has local accounts with per-printer permissions, OpenID Connect sign-in, a REST API, MQTT and webhook events, and extensions.",
+  "install_methods": [
+    {
+      "type": "default",
+      "script": "ct/prusa-connect.sh",
+      "config_path": "/opt/prusa-connect_data/config/config.yaml",
+      "resources": {
+        "cpu": 1,
+        "ram": 1024,
+        "hdd": 8,
+        "os": "Debian",
+        "version": "13"
+      }
+    }
+  ],
+  "default_credentials": {
+    "username": null,
+    "password": null
+  },
+  "notes": [
+    {
+      "text": "Prusa Connect is a public beta (0.x): configuration and API can change between releases.",
+      "type": "warning"
+    },
+    {
+      "text": "Printers need firmware 6.4.0 or newer. Use the container IP as the printer's hostname, which is limited to 20 characters.",
+      "type": "info"
+    }
+  ]
+}
