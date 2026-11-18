@@ -34,14 +34,14 @@ function update_script() {
   fi
 
   if GH_INCLUDE_PRERELEASE=1 check_for_gh_release "prusa-connect" "prusa3d/prusa-connect"; then
+    msg_info "Backing up Prusa Connect"
+    cd /opt/prusa-connect_data
+    $STD /opt/prusa-connect/prusa-connect backup create -config /opt/prusa-connect_data/config/config.yaml -upgrade-to "${CHECK_UPDATE_RELEASE#v}"
+    msg_ok "Backed up Prusa Connect"
+
     msg_info "Stopping Prusa Connect"
     systemctl stop prusa-connect
     msg_ok "Stopped Prusa Connect"
-
-    msg_info "Backing up Prusa Connect"
-    cd /opt/prusa-connect_data
-    $STD /opt/prusa-connect/prusa-connect backup create -config /opt/prusa-connect_data/config/config.yaml
-    msg_ok "Backed up Prusa Connect"
 
     GH_INCLUDE_PRERELEASE=1 fetch_and_deploy_gh_release "prusa-connect" "prusa3d/prusa-connect" "singlefile" "latest" "/opt/prusa-connect" "prusa_connect_$(arch_resolve "amd64" "aarch64")"
 
@@ -60,5 +60,5 @@ description
 msg_ok "Completed Successfully!\n"
 echo -e "${CREATING}${GN}Prusa Connect setup has been successfully initialized!${CL}"
 echo -e "${INFO}${YW}Access it using the following URL:${CL}"
-echo -e "${TAB}${GATEWAY}${BGN}http://${IP}:8080${CL}"
+echo -e "${GATEWAY}${BGN}http://${IP}:8080${CL}"
 echo -e "${INFO}${YW}The first-run setup code is in /opt/prusa-connect_data/config/config.yaml${CL}"
