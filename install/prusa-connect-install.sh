@@ -32,6 +32,8 @@ cat <<EOF >/etc/systemd/system/prusa-connect.service
 Description=Prusa Connect
 Wants=network-online.target
 After=network-online.target
+StartLimitIntervalSec=5min
+StartLimitBurst=5
 
 [Service]
 Type=simple

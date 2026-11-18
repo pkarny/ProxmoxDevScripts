@@ -27,7 +27,7 @@
       "config_path": "/opt/prusa-connect_data/config/config.yaml",
       "resources": {
         "cpu": 1,
-        "ram": 1024,
+        "ram": 512,
         "hdd": 8,
         "os": "Debian",
         "version": "13"
@@ -48,7 +48,7 @@
       "type": "info"
     },
     {
-      "text": "Updates back up the SQLite databases only. If you move a database to PostgreSQL, back it up yourself before running update.",
+      "text": "Updates back up a PostgreSQL database only when core.upgrade.postgres_backup is pg_dump. Otherwise back it up yourself before running update.",
       "type": "warning"
     }
   ]
